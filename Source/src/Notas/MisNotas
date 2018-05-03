@@ -1,0 +1,76 @@
+ String srcPath1 = ".\\src\\PARCIAL1\\alumnosAED1.txt";
+usar esta ruta para abrir una archivo dentro de un src package
+
+
+
+public INodo<E> quitarPrimero() {
+   INodo tempNodo = getPrimero();
+   if (tempNodo != null){
+       this.primero = tempNodo.getSiguiente();
+       tempNodo.setSiguiente(null);
+   }
+   return tempNodo;
+ }
+
+    public boolean eliminar(Comparable clave) {
+        if (esVacia()) {
+            return false;
+        }
+        if (primero.getSiguiente() == null) {
+            if (primero.getEtiqueta().equals(clave)) {
+                primero = null;
+                return true;
+            }
+        }
+        INodo<E> aux = primero;
+        if (aux.getEtiqueta().compareTo(clave) == 0) {
+            //Eliminamos el primer elemento
+            INodo<E> temp1 = aux;
+            INodo<E> temp = aux.getSiguiente();
+            primero = temp;
+            return true;
+        }
+        while (aux.getSiguiente() != null) {
+            if (aux.getSiguiente().getEtiqueta().equals(clave)) {
+                INodo<E> temp = aux.getSiguiente();
+                aux.setSiguiente(temp.getSiguiente());
+                return true;
+
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+
+
+public ListaOrdenada insertaOrden(int entrada)
+{
+	Nodo nuevo ;
+	nuevo = new Nodo(entrada);
+	if (primero == null) // lista vacía
+		primero = nuevo;
+		
+	else if (entrada < primero.getDato())
+	{
+		nuevo. setEnlace(primero);
+		primero = nuevo;
+	}
+	else /* búsqueda del nodo anterior a partir del quese debe insertar */
+	{
+		Nodo anterior, p;
+		anterior = p = primero;
+		while ((p.getEnlace() != null) && (entrada > p.getDato()))
+		{
+			anterior = p;
+			p = p.getEnlace();
+		}
+		if (entrada > p.getDato()) //se inserta después del último nodo
+			anterior = p;
+		
+		// Se procede al enlace del nuevo nodo
+		
+		nuevo.setEnlace(anterior.getEnlace());
+		anterior.setEnlace(nuevo);
+	}
+	return this;
+}
